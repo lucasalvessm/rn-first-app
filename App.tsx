@@ -6,20 +6,28 @@ import {
   Text,
   View,
   TextInput,
-  ScrollView
+  ScrollView,
+  FlatList
 } from 'react-native';
 
 export default function App() {
 
   const [enteredGoal, setEnteredGoal] = useState('');
-  const [courseGoals, setCourseGoals] = useState(new Array<string>());
+  const [courseGoals, setCourseGoals] = useState(new Array<{
+    id: string;
+    value: string;
+  }>());
 
   const handleInputTextChanges = (text: string) => {
     setEnteredGoal(text);
   }
 
   const addGoalHandler = () => {
-    setCourseGoals([...courseGoals, enteredGoal]);
+    setCourseGoals([
+      ...courseGoals, {
+        id: `${Math.random().toString()}${Math.random().toString()}${new Date().getTime()}`,
+        value: enteredGoal
+      }]);
   }
 
   return (
@@ -34,15 +42,17 @@ export default function App() {
         <StatusBar style="auto" />
         <Button title='Add' onPress={addGoalHandler}></Button>
       </View>
-      <ScrollView>
-        {
-          courseGoals.map((goal, index) =>
-              <View style={styles.listItem} key={index}>
-                <Text>{goal}</Text>
-              </View>
-          )
+      <FlatList
+      // keyExtractor={({}, index) => `${index}`}
+        data={courseGoals}
+        renderItem={({ item: { value } }) => {
+          return <View style={styles.listItem}>
+            <Text>{value}</Text>
+          </View>
         }
-      </ScrollView>
+
+        }>
+      </FlatList>
     </View>
   );
 }
