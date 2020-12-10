@@ -1,12 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const GoalItem = (props: GoalProps) => {
 
   return (
-    <View style={styles.listItem}>
-      <Text>{props.text}</Text>
-    </View>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => console.log('uguuuul')} onLongPress={() => props.onDeleteGoal(props.item.id)}>
+      <View style={styles.listItem}>
+        <Text>{props.item.value}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 
@@ -21,7 +23,11 @@ const styles = StyleSheet.create({
 });
 
 interface GoalProps {
-  text: string;
+  item: {
+    value: string;
+    id: string;
+  },
+  onDeleteGoal: Function;
 }
 
 export default GoalItem;
