@@ -14,11 +14,11 @@ const GoalItem = (props: GoalProps) => {
 
 const styles = StyleSheet.create({
   listItem: {
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1,
     padding: 10,
-    margin: 5
+    margin: 5,
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray'
   }
 });
 
