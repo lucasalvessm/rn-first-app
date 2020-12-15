@@ -1,1 +1,1 @@
-### A simple project to learn react native
+### A simple to do list project to learn react native
